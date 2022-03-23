@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users'
+    'users',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # Add the following two
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -130,3 +135,16 @@ SESSION_COOKIE_AGE = 60 * 60 * 24 * 30
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = 'login'
+
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.google.GoogleOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+# social auth configs for github
+SOCIAL_AUTH_GITHUB_KEY = 'f98daced6590f8df3731'
+SOCIAL_AUTH_GITHUB_SECRET = '1e5777a4d9b1714b1ed59ea6df7a53aa068e88b3'
+
